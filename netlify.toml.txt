@@ -1,3 +1,12 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/product/*"
+  to = "/product.html"
+  status = 200
+
+[[context.production.scheduled_functions]]
+  function = "daily-sales-report"
+  cron = "0 6,12,18,0 * * *"

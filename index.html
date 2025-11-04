@@ -1,125 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Down by the Bay Luxury Furniture</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Down By the Bay Furniture</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_MAPS_API_KEY}}&libraries=geometry&callback=initMap"></script>
+  <script>function initMap(){}</script>
 </head>
 <body>
 
 <header class="header">
-    <div class="container">
-        <a href="#" class="logo">
-            <h1>Down by the Bay</h1>
-            <p>Luxury Furniture</p>
-        </a>
-        <nav class="nav">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Shop</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
-    </div>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <h1>Down By the Bay</h1>
+      <p>Discount Furniture & Mattress</p>
+    </a>
+    <nav class="nav">
+      <ul>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="menu-toggle">Menu</div>
+  </div>
 </header>
 
-<section id="home" class="hero" style="background-image:url('images/ocean-hero.jpg');">
-    <div class="hero-overlay"></div>
-    <div class="hero-content container">
-        <h1>Coastal Elegance Redefined</h1>
-        <p>Handcrafted luxury furniture inspired by the sea.</p>
-        <a href="#products" class="btn-primary">Explore Collection</a>
-    </div>
+<section class="hero">
+  <div class="container">
+    <h1>Coastal Deals, Bay Prices</h1>
+    <p>Quality furniture at unbeatable prices — Seabrook, TX</p>
+  </div>
 </section>
 
 <section id="products" class="section">
-    <div class="container">
-        <h2 class="section-title">Curated Coastal Collection</h2>
-
-        <div id="employee-login-btn" class="employee-login">
-            Employee Login
-        </div>
-        <input type="file" id="json-upload" accept=".json" style="display:none;">
-
-        <div class="filters-bar">
-            <div class="category-filter">
-                <label for="category-select">Category:</label>
-                <select id="category-select">
-                    <option value="all">All Products</option>
-                </select>
-            </div>
-            <div class="search-filter">
-                <input type="text" id="search-input" placeholder="Search in this category...">
-                <i class="fas fa-search"></i>
-            </div>
-        </div>
-
-        <div id="product-grid" class="product-grid"></div>
-
-        <div class="cart-summary">
-            <p>Cart: <span id="cart-items">0</span> items – <span id="cart-total">$0</span></p>
-            <button id="checkout-btn" class="btn-primary" disabled>Checkout with Stripe</button>
-        </div>
+  <div class="container">
+    <div class="filters">
+      <select id="category-select"><option value="all">All Categories</option></select>
+      <input type="text" id="search-input" placeholder="Search furniture..."/>
     </div>
+    <div id="product-grid"></div>
+  </div>
 </section>
 
-<section id="about" class="section bg-light">
-    <div class="container">
-        <h2 class="section-title">Crafted by the Coast</h2>
-        <div class="about-grid">
-            <div class="about-item">
-                <i class="fas fa-anchor"></i>
-                <h3>Seaside Artisans</h3>
-                <p>Every piece is hand-built by master craftsmen near the bay.</p>
-            </div>
-            <div class="about-item">
-                <i class="fas fa-leaf"></i>
-                <h3>Sustainable Teak</h3>
-                <p>Ethically sourced, weather-resistant, and ocean-ready.</p>
-            </div>
-            <div class="about-item">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Lifetime Warranty</h3>
-                <p>Built to withstand salt air and sun — forever.</p>
-            </div>
-        </div>
+<div class="cart-summary">
+  <p>Cart: <span id="cart-items">0</span> items – <span id="cart-total">$0</span></p>
+
+  <div class="delivery-option">
+    <label><input type="radio" name="shipping" id="pickup-radio" checked> <strong>In-Store Pickup</strong> (Free)</label>
+    <label><input type="radio" name="shipping" id="delivery-radio"> <strong>Delivery</strong> (<span id="delivery-fee">$0</span>)</label>
+    <p style="font-size:0.85rem;color:#666;margin:0.5rem 0 0;font-style:italic;">
+      Free delivery within 10 miles. $2 per mile beyond 10 miles (calculated via Google Maps).
+    </p>
+  </div>
+
+  <div style="margin-top:1rem;padding:1rem;background:#f0f8ff;border-radius:8px;">
+    <h4 style="margin-top:0;color:#1a3d5c;">Your Phone (for SMS receipt)</h4>
+    <input type="tel" id="customer-phone" placeholder="(832) 555-1234" required style="width:100%;"/>
+  </div>
+
+  <div id="address-form" style="display:none;margin-top:1rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+    <h4 style="margin-top:0;color:#1a3d5c;">Delivery Address</h4>
+    <div class="form-group"><input type="text" id="addr-name" placeholder="Full Name" required></div>
+    <div class="form-group"><input type="text" id="addr-street" placeholder="Street Address" required></div>
+    <div class="form-group"><input type="text" id="addr-apt" placeholder="Apt, Suite (optional)"></div>
+    <div class="form-group"><input type="text" id="addr-city" placeholder="City" required></div>
+    <div class="form-group">
+      <select id="addr-state" required style="width:100%;padding:0.8rem;border:1px solid #ddd;border-radius:8px;">
+        <option value="">State</option>
+        <option value="TX">Texas</option>
+      </select>
     </div>
-</section>
+    <div class="form-group"><input type="text" id="addr-zip" placeholder="ZIP Code" required></div>
+    <div class="form-group"><input type="email" id="addr-email" placeholder="Email (receipt)" required></div>
+  </div>
+
+  <button id="checkout-btn" class="btn-primary" disabled>Checkout with Stripe</button>
+</div>
 
 <section id="contact" class="section">
-    <div class="container">
-        <h2 class="section-title">Visit Our Showroom</h2>
-        <form id="contact-form" class="contact-form">
-            <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-            <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-            <div class="form-group"><textarea rows="5" placeholder="Your Message" required></textarea></div>
-            <button type="submit" class="btn-primary">Send Message</button>
-        </form>
-        <div class="contact-info">
-            <p><i class="fas fa-map-marker-alt"></i> 42 Harbor Lane, The Bay, CA 90210</p>
-            <p><i class="fas fa-phone"></i> (555) 832-0420</p>
-            <p><i class="fas fa-envelope"></i> hello@downbythebayfurniture.com</p>
-        </div>
-    </div>
+  <div class="container">
+    <h2>Contact Us</h2>
+    <p>5735 Bayport Blvd Suite K, Seabrook, TX 77586</p>
+    <p>(832) 341-4620</p>
+    <p>Open 24/7</p>
+  </div>
 </section>
 
 <footer class="footer">
-    <div class="container">
-        <p>© <span id="year"></span> Down by the Bay Luxury Furniture. All rights reserved.</p>
-        <div class="social">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-pinterest"></i></a>
-        </div>
-    </div>
+  <div class="container">
+    <p>© <span id="year"></span> Down By the Bay Discount Furniture & Mattress</p>
+    <p>5735 Bayport Blvd Suite K, Seabrook, TX 77586 | (832) 341-4620</p>
+
+    <!-- Employee Login Button (Fixed, Scroll-to-Show) -->
+    <div id="employee-login-btn" style="
+      position: fixed; bottom: 20px; right: 20px; background: #1a3d5c; color: white;
+      padding: 12px 20px; border-radius: 50px; font-weight: 600; font-size: 0.9rem;
+      cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000;
+      transition: all 0.3s ease; display: none; align-items: center; gap: 8px;
+    ">Lock Employee Login</div>
+  </div>
 </footer>
 
-<script src="https://js.stripe.com/v3/"></script>
+<!-- Floating Cart Button -->
+<div id="floating-cart" style="position:fixed;bottom:20px;left:20px;background:#1a3d5c;color:white;width:60px;height:60px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,0.3);z-index:1000;transition:all 0.3s ease;font-family:'Montserrat',sans-serif;font-weight:600;display:none;">
+  <i class="fas fa-shopping-cart" style="font-size:1.4rem;"></i>
+  <span id="floating-cart-count" style="position:absolute;top:-8px;right:-8px;background:#e63946;color:white;font-size:0.75rem;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;">0</span>
+</div>
+
+<div id="cart-panel" style="position:fixed;bottom:90px;left:20px;background:white;width:320px;max-height:70vh;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.3);z-index:999;overflow:hidden;transform:translateY(100%);opacity:0;transition:all 0.4s ease;display:none;">
+  <div style="padding:1rem;background:#1a3d5c;color:white;font-weight:600;display:flex;justify-content:space-between;align-items:center;">
+    <span>Your Cart (<span id="panel-cart-count">0</span>)</span>
+    <button id="close-cart-panel" style="background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;">×</button>
+  </div>
+  <div id="cart-items-list" style="padding:1rem;max-height:50vh;overflow-y:auto;"></div>
+  <div style="padding:1rem;border-top:1px solid #eee;display:flex;justify-content:space-between;font-weight:600;">
+    <span>Total:</span>
+    <span id="panel-cart-total">$0.00</span>
+  </div>
+  <div style="padding:0 1rem 1rem;">
+    <button id="go-to-checkout" class="btn-primary" style="width:100%;">Go to Checkout</button>
+  </div>
+</div>
+
+<!-- Employee Panel -->
+<div id="employee-panel" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:2rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:2000;max-width:90%;width:400px;">
+  <h3 style="margin-top:0;color:#1a3d5c;">Employee Dashboard</h3>
+  <p><strong>Upload New Inventory:</strong></p>
+  <input type="file" id="json-upload-employee" accept=".json" style="margin-bottom:1rem;"/>
+  <p><strong>Download for Facebook:</strong></p>
+  <button id="download-inventory-btn" class="btn-primary" style="width:100%;margin-bottom:1rem;">Download inventory.json</button>
+  <button id="close-panel-btn" style="background:#ccc;color:#000;width:100%;">Close</button>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>

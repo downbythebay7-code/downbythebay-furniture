@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="page-title">Product</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta property="og:title" id="og-title" content=""/>
+  <meta property="og:description" id="og-desc" content=""/>
+  <meta property="og:image" id="og-image" content=""/>
+  <meta property="og:url" id="og-url" content=""/>
+  <script type="application/ld+json" id="product-schema"></script>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo"><h1>Down By the Bay</h1></a>
+    <nav class="nav"><ul><li><a href="index.html">Home</a></li></ul></nav>
+  </div>
+</header>
+
+<section class="section" style="padding:4rem 0;">
+  <div class="container">
+    <div id="product-detail" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+      <div id="product-image"></div>
+      <div id="product-info">
+        <h1 id="product-title"></h1>
+        <p class="price" id="product-price"></p>
+        <p id="product-desc"></p>
+        <p><strong>Category:</strong> <span id="product-cat"></span></p>
+        <button class="btn-primary" id="add-to-cart">Add to Cart</button>
+        <a href="index.html" class="btn-secondary" style="margin-left:1rem;">Back</a>
+
+        <div style="margin-top:2rem;display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;">
+          <button onclick="shareFB()" class="share-btn fb">Share on Facebook</button>
+          <button onclick="shareX()" class="share-btn tw">Share on X</button>
+          <button onclick="shareIG()" class="share-btn ig">Instagram Story</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> Down By the Bay</p>
+  </div>
+</footer>
+
+<script>
+const slug = window.location.pathname.split('/product/')[1]?.replace('.html','') || '';
+const title = decodeURIComponent(slug).replace(/-/g,' ');
+fetch('products.json').then(r=>r.json()).then(products => {
+  const p = products.find(x => x.title.toLowerCase() === title.toLowerCase());
+  if (!p) { document.body.innerHTML = '<h1>Not Found</h1>'; return; }
+  document.title = `${p.title} - Down By the Bay`;
+  document.getElementById('product-image').innerHTML = `<img src="${p.image}" style="width:100%;border-radius:12px;">`;
+  document.getElementById('product-title').textContent = p.title;
+  document.getElementById('product-price').textContent = `$${p.price}`;
+  document.getElementById('product-desc').textContent = p.description || 'High-quality furniture.';
+  document.getElementById('product-cat').textContent = p.category;
+
+  window.shareFB = () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${location.href}`,'_blank');
+  window.shareX = () => window.open(`https://twitter.com/intent/tweet?text=${p.title} - $${p.price}&url=${location.href}`,'_blank');
+  window.shareIG = () => alert('Open on mobile to share to Instagram Stories');
+
+  document.getElementById('add-to-cart').onclick = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')||'[]');
+    cart.push({name:p.title,price:p.price});
+    localStorage.setItem('cart',JSON.stringify(cart));
+    alert('Added!');
+  };
+});
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
