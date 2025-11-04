@@ -10,3 +10,6 @@
 [[context.production.scheduled_functions]]
   function = "daily-sales-report"
   cron = "0 6,12,18,0 * * *"
+
+[functions]
+  node_bundler = "esbuild"

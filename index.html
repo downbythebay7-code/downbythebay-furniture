@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://js.stripe.com/v3/"></script>
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_MAPS_API_KEY}}&libraries=geometry&callback=initMap"></script>
   <script>function initMap(){}</script>
@@ -95,7 +96,7 @@
     <p>© <span id="year"></span> Down By the Bay Discount Furniture & Mattress</p>
     <p>5735 Bayport Blvd Suite K, Seabrook, TX 77586 | (832) 341-4620</p>
 
-    <!-- Employee Login Button (Fixed, Scroll-to-Show) -->
+    <!-- Employee Login Button -->
     <div id="employee-login-btn" style="
       position: fixed; bottom: 20px; right: 20px; background: #1a3d5c; color: white;
       padding: 12px 20px; border-radius: 50px; font-weight: 600; font-size: 0.9rem;
@@ -105,7 +106,7 @@
   </div>
 </footer>
 
-<!-- Floating Cart Button -->
+<!-- Floating Cart -->
 <div id="floating-cart" style="position:fixed;bottom:20px;left:20px;background:#1a3d5c;color:white;width:60px;height:60px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,0.3);z-index:1000;transition:all 0.3s ease;font-family:'Montserrat',sans-serif;font-weight:600;display:none;">
   <i class="fas fa-shopping-cart" style="font-size:1.4rem;"></i>
   <span id="floating-cart-count" style="position:absolute;top:-8px;right:-8px;background:#e63946;color:white;font-size:0.75rem;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;">0</span>

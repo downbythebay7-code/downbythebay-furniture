@@ -1,5 +1,49 @@
-<!-- success.html -->
-<!DOCTYPE html><html><head><title>Success</title><link rel="stylesheet" href="style.css"></head>
-<body><section class="section" style="text-align:center;padding:6rem 0;">
-<div class="container"><h1>Thank You!</h1><p>Payment successful.</p>
-<a href="index.html" class="btn-primary">Back to Store</a></div></section></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Confirmed!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <h1>Down By the Bay</h1>
+      <p>Discount Furniture & Mattress</p>
+    </a>
+  </div>
+</header>
+
+<section class="hero" style="background:#1a3d5c;color:white;padding:6rem 0;text-align:center;">
+  <div class="container">
+    <h1>Order Confirmed!</h1>
+    <p>Thank you for your purchase. A receipt has been sent to your phone and email.</p>
+    <p><strong>We'll contact you soon to schedule delivery or pickup.</strong></p>
+    <a href="index.html" class="btn-primary" style="margin-top:2rem;display:inline-block;">Continue Shopping</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> Down By the Bay Discount Furniture & Mattress</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const params = new URLSearchParams(window.location.search);
+  const session_id = params.get('session_id');
+  if (session_id) {
+    fetch('/.netlify/functions/process-checkout', {
+      method: 'POST',
+      body: JSON.stringify({ session_id })
+    }).catch(() => {});
+  }
+</script>
+</body>
+</html>

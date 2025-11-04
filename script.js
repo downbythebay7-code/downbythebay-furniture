@@ -90,7 +90,7 @@ deliveryRadio.addEventListener('change', () => {
 function calculateDistance() {
   if (!deliveryRadio.checked || !directionsService) return;
 
-  const origin = new google.maps.LatLng(29.5978, -95.0241); // Store
+  const origin = new google.maps.LatLng(29.5978, -95.0241);
   const dest = `${addrStreet.value}, ${addrCity.value}, ${addrState.value} ${addrZip.value}`;
 
   directionsService.route({
@@ -182,28 +182,30 @@ function populateCategories() {
 categorySelect.onchange = renderProducts;
 searchInput.oninput = renderProducts;
 
-// Checkout
+// Checkout with Stripe
 checkoutBtn.onclick = async () => {
   if (!customerPhone.value) return alert('Enter phone for SMS receipt');
   if (deliveryRadio.checked) {
     const req = [addrStreet, addrCity, addrState, addrZip];
     for (let f of req) if (!f.value) return alert('Fill address');
   }
-  const total = parseFloat(cartTotalEl.textContent.replace('$',''));
-  const isPickup = pickupRadio.checked;
 
-  // Send sale
-  await fetch('/.netlify/functions/log-sale', {method:'POST',body:JSON.stringify({items:cart,total,pickup:isPickup,date:new Date().toLocaleDateString()})});
-  await fetch('/.netlify/functions/send-sale-email', {method:'POST',body:JSON.stringify({items:cart,total,pickup:isPickup,address:deliveryRadio.checked?{street:addrStreet.value}:null})});
-  await fetch('/.netlify/functions/send-sms', {method:'POST',body:JSON.stringify({message:`NEW SALE: $${total} - ${cart.map(i=>i.name).join(', ')}`, to: process.env.SMS_TO})});
-  await fetch('/.netlify/functions/send-sms', {method:'POST',body:JSON.stringify({message:`Thank you! Order: ${cart.map(i=>i.name).join(', ')} Total: $${total}`, to: customerPhone.value})});
+  const total = cart.reduce((s,i)=>s+i.price,0) + (deliveryRadio.checked ? parseFloat(document.getElementById('delivery-fee').textContent.replace('$','').split(' ')[0]) || 0 : 0);
 
-  // Delete items
-  for (let i of cart) await fetch('/.netlify/functions/delete-item', {method:'POST',body:JSON.stringify({title:i.name})});
-
-  cart = [];
-  updateCart();
-  alert('Order placed!');
+  const response = await fetch('/.netlify/functions/create-checkout', {
+    method: 'POST',
+    body: JSON.stringify({
+      items: cart,
+      total,
+      pickup: pickupRadio.checked,
+      phone: customerPhone.value,
+      success_url: window.location.origin + '/success.html',
+      cancel_url: window.location.origin + '/cancel.html'
+    })
+  });
+  const { id } = await response.json();
+  const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
+  stripe.redirectToCheckout({ sessionId: id });
 };
 
 // Year

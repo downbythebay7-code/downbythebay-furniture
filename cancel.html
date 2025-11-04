@@ -1,5 +1,39 @@
-<!-- cancel.html -->
-<!DOCTYPE html><html><head><title>Canceled</title><link rel="stylesheet" href="style.css"></head>
-<body><section class="section" style="text-align:center;padding:6rem 0;">
-<div class="container"><h1>Payment Canceled</h1><p>No charge.</p>
-<a href="index.html" class="btn-primary">Continue Shopping</a></div></section></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Canceled</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <h1>Down By the Bay</h1>
+      <p>Discount Furniture & Mattress</p>
+    </a>
+  </div>
+</header>
+
+<section class="hero" style="background:#e63946;color:white;padding:6rem 0;text-align:center;">
+  <div class="container">
+    <h1>Payment Canceled</h1>
+    <p>Your order was not completed. No charges were made.</p>
+    <a href="index.html" class="btn-primary" style="margin-top:2rem;display:inline-block;background:white;color:#e63946;">Return to Shop</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> Down By the Bay</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
