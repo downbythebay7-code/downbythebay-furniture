@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Down by the Bay Luxury Furniture</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <a href="#" class="logo">
+            <h1>Down by the Bay</h1>
+            <p>Luxury Furniture</p>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<section id="home" class="hero" style="background-image:url('images/ocean-hero.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+        <h1>Coastal Elegance Redefined</h1>
+        <p>Handcrafted luxury furniture inspired by the sea.</p>
+        <a href="#products" class="btn-primary">Explore Collection</a>
+    </div>
+</section>
+
+<section id="products" class="section">
+    <div class="container">
+        <h2 class="section-title">Curated Coastal Collection</h2>
+
+        <div id="employee-login-btn" class="employee-login">
+            Employee Login
+        </div>
+        <input type="file" id="json-upload" accept=".json" style="display:none;">
+
+        <div class="filters-bar">
+            <div class="category-filter">
+                <label for="category-select">Category:</label>
+                <select id="category-select">
+                    <option value="all">All Products</option>
+                </select>
+            </div>
+            <div class="search-filter">
+                <input type="text" id="search-input" placeholder="Search in this category...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div id="product-grid" class="product-grid"></div>
+
+        <div class="cart-summary">
+            <p>Cart: <span id="cart-items">0</span> items – <span id="cart-total">$0</span></p>
+            <button id="checkout-btn" class="btn-primary" disabled>Checkout with Stripe</button>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="section bg-light">
+    <div class="container">
+        <h2 class="section-title">Crafted by the Coast</h2>
+        <div class="about-grid">
+            <div class="about-item">
+                <i class="fas fa-anchor"></i>
+                <h3>Seaside Artisans</h3>
+                <p>Every piece is hand-built by master craftsmen near the bay.</p>
+            </div>
+            <div class="about-item">
+                <i class="fas fa-leaf"></i>
+                <h3>Sustainable Teak</h3>
+                <p>Ethically sourced, weather-resistant, and ocean-ready.</p>
+            </div>
+            <div class="about-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Lifetime Warranty</h3>
+                <p>Built to withstand salt air and sun — forever.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="section-title">Visit Our Showroom</h2>
+        <form id="contact-form" class="contact-form">
+            <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" placeholder="Your Email" required></div>
+            <div class="form-group"><textarea rows="5" placeholder="Your Message" required></textarea></div>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 42 Harbor Lane, The Bay, CA 90210</p>
+            <p><i class="fas fa-phone"></i> (555) 832-0420</p>
+            <p><i class="fas fa-envelope"></i> hello@downbythebayfurniture.com</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>© <span id="year"></span> Down by the Bay Luxury Furniture. All rights reserved.</p>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="script.js"></script>
+</body>
+</html>
